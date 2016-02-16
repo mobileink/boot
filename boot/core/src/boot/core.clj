@@ -989,11 +989,13 @@
   a seq of file objects. Returns a seq of the files in `files` which have file
   names listed in `names`."
   [names files & [negate?]]
+  {:pre [(vector? names)]}
   ((file-filter #(fn [f] (= (.getName f) %))) names files negate?))
 
 (defn not-by-name
   "This function is the same as `by-name` but negated."
   [names files]
+  {:pre [(vector? names)]}
   (by-name names files true))
 
 (defn by-path
@@ -1002,11 +1004,13 @@
   a seq of file objects. Returns a seq of the files in `files` which have file
   paths listed in `paths`."
   [paths files & [negate?]]
+  {:pre [(vector? paths)]}
   ((file-filter #(fn [f] (= (.getPath f) %))) paths files negate?))
 
 (defn not-by-path
   "This function is the same as `by-path` but negated."
   [paths files]
+  {:pre [(vector? paths)]}
   (by-path paths files true))
 
 (defn by-ext
@@ -1015,11 +1019,13 @@
   file objects. Returns a seq of the files in `files` which have file extensions
   listed in `exts`."
   [exts files & [negate?]]
+  {:pre [(vector? exts)]}
   ((file-filter #(fn [f] (.endsWith (.getName f) %))) exts files negate?))
 
 (defn not-by-ext
   "This function is the same as `by-ext` but negated."
   [exts files]
+  {:pre [(vector? exts)]}
   (by-ext exts files true))
 
 (defn by-re
@@ -1028,11 +1034,13 @@
   file objects. Returns a seq of the files in `files` whose paths match one of
   the regex patterns in `res`."
   [res files & [negate?]]
+  {:pre [(vector? res)]}
   ((file-filter #(fn [f] (re-find % (.getPath f)))) res files negate?))
 
 (defn not-by-re
   "This function is the same as `by-re` but negated."
   [res files]
+  {:pre [(vector? res)]}
   (by-re res files true))
 
 ;; General utilities ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
